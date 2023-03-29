@@ -8,13 +8,6 @@ import mercadopago
 app = Flask(__name__)
 sdk = mercadopago.SDK(os.getenv('YOUR_ACCESS_TOKEN'))
 
-
-@app.route('/')
-def home():
-   return render_template('index.html', public_key=os.getenv('YOUR_PUBLIC_KEY'))
-if __name__ == '__main__':
-   app.run()
-
 @app.route('/process_payment', methods=['POST'])
 def add_income():
     request_values = request.get_json()
@@ -43,3 +36,8 @@ def add_income():
 
     return jsonify(payment), 200
 
+@app.route('/')
+def home():
+   return render_template('index.html', public_key=os.getenv('YOUR_PUBLIC_KEY'))
+if __name__ == '__main__':
+   app.run()
